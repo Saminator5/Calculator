@@ -79,7 +79,7 @@ class CalculatorApp extends React.Component {
                 </div>
                 <div className="input-group-prepend">
                   <div className="input-group-text">$</div>
-                  <input type="text" className="form-control" id="home-value" placeholder="150,000" onChange={this.homeValue.bind(this)}/>
+                  <input type="text" className="form-control" id="home-value" placeholder="0" onChange={this.homeValue.bind(this)}/>
                 </div>
               </div>
 
@@ -100,7 +100,7 @@ class CalculatorApp extends React.Component {
                   <option value="10">10 Years</option>
                   <option value="11">11 Years</option>
                   <option value="12">12 Years</option>
-                  <option value="13">4 Years</option>
+                  <option value="13">13 Years</option>
                   <option value="14">14 Years</option>
                   <option value="15">15 Years</option>
                   <option value="16">16 Years</option>
@@ -145,7 +145,7 @@ class CalculatorApp extends React.Component {
                   <label htmlFor="interest-rate">Interest Rate</label>
                 </div>
                 <div className="input-group-prepend">
-                  <input type="text" className="form-control" id="interest-rate" placeholder="3.97" onChange={this.interestRate.bind(this)}/>
+                  <input type="text" className="form-control" id="interest-rate" placeholder="0.00" onChange={this.interestRate.bind(this)}/>
                   <div className="input-group-text">%</div>
                 </div>
               </div>
@@ -178,7 +178,7 @@ class CalculatorApp extends React.Component {
                 <span className="badge badge-success badge-pill">${this.state.monthly_payment}</span>
               </li>
               <li className="list-group-item d-flex justify-content-between align-items-center">
-                Total Payments
+                New Total Payments
                 <span className="badge badge-success badge-pill">${this.state.updated_total_payments}</span>
               </li>
             </ul>
