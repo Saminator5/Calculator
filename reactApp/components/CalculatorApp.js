@@ -49,17 +49,17 @@ class CalculatorApp extends React.Component {
         // 1) Get the monthly interest rate
         const monthly_interest_rate = interest_rate_converted / 12;
         // 2) Input info into equation for monthly payment
-        const monthly_payment = parseInt(principal * ( (monthly_interest_rate * Math.pow(1 + monthly_interest_rate, monthly_loan_term) ) /
+        const orig_monthly_payment = parseInt(principal * ( (monthly_interest_rate * Math.pow(1 + monthly_interest_rate, monthly_loan_term) ) /
                                         (Math.pow(1 + monthly_interest_rate, monthly_loan_term) - 1)
                                       ));
         // 4) Get the total interest
-        const total_interest = (monthly_payment * (monthly_loan_term)) - principal;
+        const total_interest = (orig_monthly_payment * (monthly_loan_term)) - principal;
 
         const orig_total_payments = principal + total_interest;
         const interest_eliminated = parseInt(0.45 * total_interest);
         const updated_interest = total_interest - interest_eliminated;
         const updated_total_payments = principal + updated_interest;
-        _this.setState({principal, total_interest, orig_total_payments, interest_eliminated, updated_interest, updated_total_payments, monthly_payment})
+        _this.setState({principal, total_interest, orig_total_payments, interest_eliminated, updated_interest, updated_total_payments})
 
         _this.setState({calculated: true, calculating: false})
 
@@ -151,31 +151,29 @@ class CalculatorApp extends React.Component {
               </div>
             </form>
           </div>
-          {this.state.calculated ? <div style={{marginTop: 15}}>
-            <ul className="list-group">
+          {this.state.calculated ? <div style={{display: 'flex', flexDirection: 'row', marginTop: 15, justifyContent: 'space-evenly'}}>
+            <ul className="list-group" style={{fontSize: 20, flex: 1, marginRight: 5}}>
               <li className="list-group-item d-flex justify-content-between align-items-center">
                 Principal
                 <span className="badge badge-primary badge-pill">${this.state.principal}</span>
               </li>
               <li className="list-group-item d-flex justify-content-between align-items-center">
-                Interest
+                Initial Interest
                 <span className="badge badge-info badge-pill">${this.state.total_interest}</span>
               </li>
               <li className="list-group-item d-flex justify-content-between align-items-center">
-                Total Payments
+                Original Total Payments
                 <span className="badge badge-success badge-pill">${this.state.orig_total_payments}</span>
               </li>
+            </ul>
+            <ul className="list-group" style={{fontSize: 20, flex: 1}}>
               <li className="list-group-item d-flex justify-content-between align-items-center">
                 Interest Eliminated
                 <span className="badge badge-danger badge-pill">${this.state.interest_eliminated}</span>
               </li>
               <li className="list-group-item d-flex justify-content-between align-items-center">
-                New Interest Amount
+                New Interest
                 <span className="badge badge-info badge-pill">${this.state.updated_interest}</span>
-              </li>
-              <li className="list-group-item d-flex justify-content-between align-items-center">
-                Monthly Payment
-                <span className="badge badge-success badge-pill">${this.state.monthly_payment}</span>
               </li>
               <li className="list-group-item d-flex justify-content-between align-items-center">
                 New Total Payments
@@ -188,7 +186,7 @@ class CalculatorApp extends React.Component {
             ?<div style={{alignSelf: 'center', marginTop: 15}}><Loader color="#26A65B" size="16px" margin="4px"/></div>
 
             : <div style={{alignSelf: 'center', marginTop: 15}}>
-              <button onClick={() => this.waitCalculate()} type="submit" className="btn btn-warning mb-2">Calculate</button>
+              <button onClick={() => this.waitCalculate()} type="submit" className="btn btn-warning mb-2" style={{color: 'white'}}>Xcelerate</button>
             </div>
           }
         </div>
