@@ -72,9 +72,9 @@ render() {
   return (
     <div className="container" style={{display: 'flex', height: '100vh', width: '100%', justifyContent: 'center', marginTop: 50}}>
       <div style={{display: 'flex', flexDirection: 'column',  width: '100%'}}>
-        <div style={{display: 'flex', width: '100%'}}>
-          <form className="form-inline" style={{display: 'flex', width: '100%', justifyContent: 'space-evenly'}}>
-            <div className="input-group mb-2 mr-sm-2" style={{display: 'flex', flexDirection: 'column'}}>
+        <div style={{display: 'flex', width: '100%', justifyContent: 'space-around'}}>
+          <div style={{display: 'flex', width: '100%', justifyContent: 'space-evenly'}}>
+            <div style={{display: 'flex', flex: 2, flexDirection: 'column', maxWidth: 300}}>
               <div>
                 <label htmlFor="home-value">Loan Amount</label>
               </div>
@@ -84,17 +84,19 @@ render() {
               </div>
             </div>
 
-            <div>
+            <div style={{display: 'flex', flex: 1, flexDirection: 'column', maxWidth: 300}}>
               <div>
                 <label htmlFor="loan-term">Loan Term</label>
               </div>
-              <select onChange={this.loanTerm.bind(this)} id="loan-term" className="form-control form-control-md">
-                <option value="15">15 Years</option>
-                <option value="30">30 Years</option>
-              </select>
+              <div>
+                <select onChange={this.loanTerm.bind(this)} id="loan-term" className="form-control form-control-md">
+                  <option value="15">15 Years</option>
+                  <option value="30">30 Years</option>
+                </select>
+              </div>
             </div>
 
-            <div className="input-group mb-2 mr-sm-2" style={{display: 'flex', flexDirection: 'column'}}>
+            <div style={{display: 'flex', flex: 2, flexDirection: 'column', maxWidth: 300}}>
               <div>
                 <label htmlFor="interest-rate">Interest Rate</label>
               </div>
@@ -103,60 +105,67 @@ render() {
                 <div className="input-group-text">%</div>
               </div>
             </div>
-          </form>
+          </div>
         </div>
         {this.state.calculated ? <div style={{display: 'flex', flexDirection: 'column'}}>
           <div style={{display: 'flex', flex: 1, justifyContent: 'center', marginTop: 10}}>
             <div style={{display: 'flex', flex: 1/2}}>
-              <ul className="list-group" style={{fontSize: 20, flex: 1, marginRight: 5}}>
-                <li className="list-group-item d-flex justify-content-between align-items-center">
-                  Principal
-                  <span className="badge badge-info badge-pill">${this.state.loan_value}</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div style={{display: 'flex', flexDirection: 'row', marginTop: 15, justifyContent: 'space-evenly'}}>
             <ul className="list-group" style={{fontSize: 20, flex: 1, marginRight: 5}}>
               <li className="list-group-item d-flex justify-content-between align-items-center">
-                Initial Interest
-                <span className="badge badge-info badge-pill">${this.state.total_interest}</span>
-              </li>
-              <li className="list-group-item d-flex justify-content-between align-items-center">
-                Original Total Payments
-                <span className="badge badge-success badge-pill">${this.state.orig_total_payments}</span>
-              </li>
-              <li className="list-group-item d-flex justify-content-between align-items-center">
-                Years To Pay
-                <span className="badge badge-secondary badge-pill">{this.state.loan_term}</span>
+                Principal
+                <span className="badge badge-primary badge-pill">${this.state.loan_value}</span>
               </li>
             </ul>
-            <ul className="list-group" style={{fontSize: 20, flex: 1}}>
-              <li className="list-group-item d-flex justify-content-between align-items-center">
-                Interest Eliminated
-                <span className="badge badge-danger badge-pill">${this.state.interest_eliminated}</span>
-              </li>
-              <li className="list-group-item d-flex justify-content-between align-items-center">
-                New Total Payments
-                <span className="badge badge-success badge-pill">${this.state.updated_total_payments}</span>
-              </li>
-              <li className="list-group-item d-flex justify-content-between align-items-center">
-                Years To Pay
-                <span className="badge badge-secondary badge-pill">{this.state.loan_term / 2}</span>
-              </li>
-            </ul>
-          </div> </div>: <div></div>}
-          {this.state.calculating
-            ?<div style={{alignSelf: 'center', marginTop: 15}}><Loader color="#26A65B" size="16px" margin="4px"/></div>
+          </div>
+        </div>
+        <div style={{display: 'flex', flexDirection: 'row', marginTop: 7, justifyContent: 'space-evenly'}}>
+          <ul className="list-group" style={{fontSize: 20, flex: 1, marginRight: 5}}>
+            <li className="list-group-item d-flex justify-content-between align-items-center">
+              Initial Interest
+              <span className="badge badge-info badge-pill">${this.state.total_interest}</span>
+            </li>
+            <li className="list-group-item d-flex justify-content-between align-items-center">
+              Original Total Payments
+              <span className="badge badge-success badge-pill">${this.state.orig_total_payments}</span>
+            </li>
+            <li className="list-group-item d-flex justify-content-between align-items-center">
+              Years To Pay
+              <span className="badge badge-secondary badge-pill">{this.state.loan_term}</span>
+            </li>
+          </ul>
+          <ul className="list-group" style={{fontSize: 20, flex: 1}}>
+            <li className="list-group-item d-flex justify-content-between align-items-center">
+              Interest Eliminated
+              <span className="badge badge-danger badge-pill">${this.state.interest_eliminated}</span>
+            </li>
+            <li className="list-group-item d-flex justify-content-between align-items-center">
+              New Total Payments
+              <span className="badge badge-success badge-pill">${this.state.updated_total_payments}</span>
+            </li>
+            <li className="list-group-item d-flex justify-content-between align-items-center">
+              Years To Pay
+              <span className="badge badge-secondary badge-pill">{this.state.loan_term / 2}</span>
+            </li>
+          </ul>
+        </div> </div>: <div></div>}
+        {this.state.calculating
+          ?<div style={{alignSelf: 'center', marginTop: 15}}><Loader color="#26A65B" size="16px" margin="4px"/></div>
 
-            : <div style={{alignSelf: 'center', marginTop: 15}}>
+          : <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: 15, flexDirection: 'column'}}>
+            <div style={{display: 'flex'}}>
               <button onClick={() => this.waitCalculate()} type="submit" className="btn btn-warning mb-2" style={{color: 'white'}}>Xcelerator Estimate</button>
             </div>
-          }
-        </div>
+            <div style={{display: 'flex', color: 'black', fontSize: 5, fontWeight: 'bold', width: 200}}>
+              The legal disclaimer:
+              Estimates are based on using the Xcelerator Report from the 1st Mortgage Payment, and consistently using Xcelerator Report till Mortgage is paid off.
+              This program will also work on existing mortgages (payments made already), refinanced mortgages).  To get an accurate report based specifically on your mortgage situation, you will need to purchase a report.
+            </div>
+          </div>
+        }
       </div>
-    );
-  }
+    </div>
+  );
+}
 }
 
 module.exports = CalculatorApp;
